@@ -9,12 +9,14 @@ module.exports.list = (req, res, next) => {
 }
 
 module.exports.create = (req, res, next) => {
-  Celebrities.find()
-    .then((celebrities) => res.render('/form', { celebrities: new Celebrities() }));
+  res.render('celebrities/form')
 }
 
 module.exports.doCreate = (req, res, next) => {
-  const celebrities = new Celebrities(req.body);
+  // const { name, occupation, catchPhrase } = req.body
+  console.log('create')
+  const celebrities = new Celebrities(req.body); 
+
 
   celebrities.save()
     .then((celebrities) => { res.redirect('/celebrities' )});
