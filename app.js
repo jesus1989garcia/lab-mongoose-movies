@@ -18,3 +18,6 @@ hbs.registerPartials(__dirname + '/views/partials')
 app.use(express.static(__dirname + '/public'));
 
 app.listen(PORT, () => console.info(`App listen at ${PORT} port`));
+
+
+//hola que ase
