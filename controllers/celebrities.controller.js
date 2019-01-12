@@ -1,10 +1,9 @@
-const Celebrities = require('../models/book.model');
-//const User = require('../models/user.model');
+const Celebrities = require('../models/celebrities.model');
+//const User = require('../models/movies.model');
 
 module.exports.list = (req, res, next) => {
-  Book.find()
-    .populate('user')
-    .then((books) => res.render('books/list', { books }))
+  Celebrities.find()
+    .then((celebrities) => res.render('celebrities/list', { celebrities }))
 }
 
 module.exports.create = (req, res, next) => {
