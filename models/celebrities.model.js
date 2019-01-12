@@ -17,4 +17,4 @@ const schema = new mongoose.Schema({
     timestamps: true
 }); 
 
-model.exports = mongoose.model("Celebrities", schema); // es posible que haya que poner Celebrity
+module.exports = mongoose.model("Celebrities", schema); // es posible que haya que poner Celebrity
