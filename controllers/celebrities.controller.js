@@ -8,17 +8,17 @@ module.exports.list = (req, res, next) => {
     //create index, hacer next
 }
 
-// module.exports.create = (req, res, next) => {
-//   Celebrities.find()
-//     .then((users) => res.render('/form', { book: new Book(), users }));
-// }
+module.exports.create = (req, res, next) => {
+  Celebrities.find()
+    .then((celebrities) => res.render('/form', { celebrities: new Celebrities() }));
+}
 
-// module.exports.doCreate = (req, res, next) => {
-//   const book = new Book(req.body);
+module.exports.doCreate = (req, res, next) => {
+  const celebrities = new Celebrities(req.body);
 
-//   book.save()
-//     .then((book) => { res.redirect('/books' )});
-// }
+  celebrities.save()
+    .then((celebrities) => { res.redirect('/celebrities' )});
+}
 
 // module.exports.edit = (req, res, next) => {
 //   Promise.all([
