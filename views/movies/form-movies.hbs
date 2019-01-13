@@ -19,7 +19,7 @@
 
   <div class="form-group">
     <label for="production">Production</label>
-    <input class="form-control" name="production" >{{movie.production}}</input>
+    <input type="text" class="form-control" id="production" name="production" value="{{movie.production}}">
   </div>
 
   <div class="form-group">
@@ -30,6 +30,11 @@
       {{/each}}
     </select>
   </div>
+
+    <div class="form-group">
+        <label for="photo">Copy and Paste here the link for a Movie Photo</label>
+        <input class="form-control" name="photo">{{movie.photo}}</input>
+    </div>
 
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>

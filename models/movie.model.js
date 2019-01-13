@@ -16,7 +16,10 @@ const schema = new mongoose.Schema({
     celebrity: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Celebrity'
-      }
+      },
+    photo: {
+        type: String
+    }
 }, {
     timestamps: true
 }); 

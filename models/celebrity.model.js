@@ -12,6 +12,9 @@ const schema = new mongoose.Schema({
     catchPhrase: {
         type: String,
         required: true
+    },
+    photo: {
+        type: String
     }
 }, {
     timestamps: true
