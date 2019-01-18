@@ -1,53 +1,59 @@
-const Celebrity = require('../models/celebrity.model');
+const Celebrities = require('../models/celebrities.model');
+//const User = require('../models/movies.model');
 
 module.exports.list = (req, res, next) => {
-  Celebrity.find()
-    .then((celebrities) => res.render('celebrities/index', { celebrities }))
-    .catch(err => next(err))
-    console.log("Funciona el listado de Celebrities")
+  Celebrities.find()
+    .then((celebrities) => res.render('celebrities/index', { celebrities }));
+    console.log("funciona!");
+    //create index, hacer next
 }
 
 module.exports.create = (req, res, next) => {
-  Celebrity.find()
-    .then((celebrities) => res.render('celebrities/form', { celebrity: new Celebrity() }));
+  res.render('celebrities/form')
 }
 
 module.exports.doCreate = (req, res, next) => {
-  const celebrity = new Celebrity(req.body); 
+  // const { name, occupation, catchPhrase } = req.body   it's the same as below
+  console.log('create')
+  const celebrities = new Celebrities(req.body); 
 
-  celebrity.save()
-    .then((celebrity) => { res.redirect('/celebrities' )});
+
+  celebrities.save()
+    .then((celebrities) => { res.redirect('/celebrities' )});
 }
-
 module.exports.edit = (req, res, next) => {
-    Celebrity.findById(req.params.id)
-
-  .then((celebrity) => {
-
-    res.render('celebrities/form', { celebrity })
-  })
+  Celebrities.findById(req.params.id)
+  .then((celebrity) => res.render('celebrities/edit', {celebrity}));
 }
-
 
 module.exports.doEdit = (req, res, next) => {
-  Celebrity.findById(req.params.id)
-    .then((celebrity) => {
-      celebrity.set(req.body);
+  console.log("works")
+  Celebrities.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true })
+  
+    // Celebrities.findById(req.params.id)
+    // .then((celebrity) => {
+    //   const { name, occupation, catchPhrase } = req.body;
+    //   // //celebrity.set(req.body);
+      // //console.log(req.body)
+      // celebrity.findByIdAndUpdate
+      //       celebrity.save()
+       .then((celebrity) => {
+         console.log(celebrity)
+         res.redirect('/celebrities')
+        });
+    // })
+  }
+ 
 
-      celebrity.save()
-        .then((celebrity) => { res.redirect('/celebrities' )});
-        console.log("Funciona el doEdit")
-    })
-}
 
 module.exports.get = (req, res, next) => {
-  Celebrity.findById(req.params.id)
-    .then(celebrity => res.render('celebrities/detail', { celebrity }));
-    console.log("Funciona el get de Celebrities")
-}
+  Celebrities.findById(req.params.id)
+  
+  .then((celebrity)=> res.render('celebrities/show', {celebrity}))  // beware of the "/" when starting a view path
+} 
 
 module.exports.delete = (req, res, next) => {
-  Celebrity.findByIdAndDelete(req.params.id)
+  Celebrities.findByIdAndDelete(req.params.id)
     .then(() => res.redirect('/celebrities'));
 }
 

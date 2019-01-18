@@ -1,23 +1,15 @@
-<h2>Celebrities</h2>
-<a class="btn btn-primary mb-3" href="/celebrities/create">New Celebrities</a>
+<h2>index celebrities</h2>
+  <ul>
+  {{#each celebrities as |celebrity|}}
+  <li>{{ celebrity.name }} <a href="/celebrities/{{celebrity._id }}"> See </a>   </li>
+  <form action="/celebrities/{{celebrity._id}}/delete" method="post">
+  <button type="submit">delete</button></form>
+  <a href="/celebrities/{{celebrity._id}}/edit">edit</a>
+  {{/each}}
+</ul>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Celebrity Name</th>
-      <th>Details</th>
-    </tr>
-  </thead>
-  <tbody>
-    {{#each celebrities as |celebrity| }}
-      <tr>
-        <td>{{ celebrity.name }}</td>
-        <td>
-          <a href="/celebrities/{{ celebrity._id }}">View more...</a> 
-        </td>
-      </tr>
-    {{/each}}
-  </tbody>
-</table>
+<a href="/celebrities/new">Add a new celebrity</a>
+<div>
+  <a href="/movies">go to movies</a>
+</div>
 
-<a class="btn btn-secondary mt-3" href="/movies">View the Movies</a>

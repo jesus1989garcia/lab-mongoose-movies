@@ -1,65 +1,38 @@
-const Movie = require('../models/movie.model');
-const Celebrity = require('../models/celebrity.model');
+const Movies = require('../models/movies.model');
 
 module.exports.list = (req, res, next) => {
-  Movie.find()
-    .populate('celebrity')
-    .then((movies) => res.render('movies/index-movies', { movies }))
-    // .catch(err => next(err))
-    console.log("Funciona el listado de movies")
+  Movies.find()
+  .then((movies) => res.render('movies/index', {movies}));
+  
 }
-
 module.exports.create = (req, res, next) => {
-  Celebrity.find()
-    .then((celebrities) => res.render('movies/form-movies', { movie: new Movie(), celebrities }));
+  res.render('movies/form');
 }
 
 module.exports.doCreate = (req, res, next) => {
-  const movie = new Movie(req.body); 
-
-  movie.save()
-    .then((movie) => { res.redirect('/movies' )});
-    console.log("Funciona el salvado de Movies")
-}
-
-module.exports.edit = (req, res, next) => {
-    Promise.all([
-      Celebrity.find(),
-      Movie.findById(req.params.id)
-    ])
-    .then((results) => {
-      const celebrities = results[0];
-      const movie = results[1]
-  
-      res.render('movies/form-movies', { movie, celebrities })
-    })
-  }
-
-
-module.exports.doEdit = (req, res, next) => {
-  Movie.findById(req.params.id)
-    .then((movie) => {
-      movie.set(req.body);
-
-      movie.save()
-        .then((movie) => { res.redirect('/movies' )});
-        console.log("Funciona el doEdit")
-    })
+  const movies = new Movies(req.body);
+  movies.save()
+  .then((movies) => res.render('movies/index', {movies}))
 }
 
 module.exports.get = (req, res, next) => {
-  Movie.findById(req.params.id)
-  .then(movie => {
-
-    Celebrity.findById(movie.celebrity)
-      .then((celebrity) => res.render('movies/detail-movies', { movie, celebrity }))
-  });
+  Movies.findById(req.params.id)
+  .then((movie) => res.render('movies/show', {movie}))
 }
 
 module.exports.delete = (req, res, next) => {
-  Movie.findByIdAndDelete(req.params.id)
-    .then(() => res.redirect('/movies'));
+  Movies.findByIdAndDelete(req.params.id)
+  .then(() => res.redirect('/movies'))
 }
 
+module.exports.edit = (req, res, next) => {
+  Movies.findById(req.params.id)
+  .then((movie) => res.render('movies/edit', {movie}))
+  
+}
 
-
+module.exports.doEdit = (req, res, next) => {
+  console.log("doEdited works")
+  Movies.findOneAndUpdate({ _id: req.params.id }, { $set: req.body }, { new: true })
+  .then((movie) => res.redirect('/movies'))
+}

@@ -1,0 +1,11 @@
+<h2>details movie</h2>
+
+<ul>
+  {{#each movie as |movie|}}
+  <li>{{movie.title}}</li>
+  <li>{{movie.genre}}</li>
+  <li>{{movie.plot}}</li>
+  {{/each}}
+</ul>
+
+<a href="/movies">go movies</a>

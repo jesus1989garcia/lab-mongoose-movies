@@ -1,0 +1,18 @@
+<h2>add a new movie</h2>
+
+<form action="/movies/new" method="post">
+<div>
+  <label for="title">title</label>
+  <input type="text" class="form-control" id="title" name="title" value="{{movies.title}}">
+
+</div>
+<div>
+  <label for="genre">genre</label>
+  <input type="text" class="form-control" id="genre" name="genre" value="{{movies.genre}}">
+</div>
+<div>
+  <label for="plot">plot</label>
+  <input type="text" class="form-control" id="plot" name="plot" value="{{movies.plot}}">
+</div>
+<button type="submit">add movie</button>
+</form>
